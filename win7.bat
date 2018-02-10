@@ -1,10 +1,10 @@
 @echo off
 
-SET ip=192.168.58.130
+SET ip=192.168.58.128
 
-netsh advfirewall restet
+netsh advfirewall reset
 
-netsh advfirewall firewall delete rule=any profile=any
+netsh advfirewall firewall delete rule name =all
 
 netsh advfirewall firewall add rule name="DNS" dir=out remoteip=%ip% action=allow protocol=tcp remoteport=53 enable=yes profile=any
 netsh advfirewall firewall add rule name="DNS" dir=out remoteip=%ip% action=allow protocol=udp remoteport=53 enable=yes profile=any
@@ -31,6 +31,6 @@ netsh advfirewall firewall add rule name="RPC" dir=out remoteip=%ip% action=allo
 
 netsh advfirewall firewall add rule name="RPC" dir=out remoteip=%ip% action=allow protocol=tcp remoteport=455 enable=yes profile=any
 
-netsh advfirewall firewall add rule name="Allow Chrome" dir=any action=allow program="C:\Program Files\Mozilla Firefox\firefox.exe" enable=yes profile=any
+netsh advfirewall firewall add rule name="Allow Firefox" dir=in action=allow program="C:\Program Files\Mozilla Firefox\firefox.exe" enable=yes profile=any
 
 pause
