@@ -15,15 +15,15 @@ netsh advfirewall firewall delete rule name =all
 netsh advfirewall set allprofiles firewallpolicy blockinbound,blockoutbound
 
 :: DNS
-netsh advfirewall firewall add rule name="DNS" dir=out remoteip=%ip% action=allow protocol=tcp remoteport=53 enable=yes profile=any
-netsh advfirewall firewall add rule name="DNS" dir=out remoteip=%ip% action=allow protocol=udp remoteport=53 enable=yes profile=any
-netsh advfirewall firewall add rule name="DNS" dir=in remoteip=%ip% action=allow protocol=tcp remoteport=53 enable=yes profile=any
-netsh advfirewall firewall add rule name="DNS" dir=in remoteip=%ip% action=allow protocol=udp remoteport=53 enable=yes profile=any
+:: Once DNS is confirmed to work you should add the remoteip=%ip% option
+netsh advfirewall firewall add rule name="DNS" dir=out action=allow protocol=tcp remoteport=53 enable=yes profile=any
+netsh advfirewall firewall add rule name="DNS" dir=out action=allow protocol=udp remoteport=53 enable=yes profile=any
+netsh advfirewall firewall add rule name="DNS" dir=in action=allow protocol=tcp remoteport=53 enable=yes profile=any
+netsh advfirewall firewall add rule name="DNS" dir=in action=allow protocol=udp remoteport=53 enable=yes profile=any
 
 :: AD/LDAP Client that is already joined to Domain
 netsh advfirewall firewall add rule name=AdClient dir=out protocol=tcp remoteport=88,389,445 remoteip=%ip% action=allow
 netsh advfirewall firewall add rule name=AdClinet dir=in protocol=tcp remoteport=88,389,445 remoteip=%ip% action=allow
-netsh advfirewall firewall add rule name=ADClinet dir=in protocol=tcp remoteport=88,389,445 remoteip=%ip% action=allow
 netsh advfirewall firewall add rule name=ADclinet dir=in protocol=udp remoteport=389 remoteip=%ip% action=allow
 netsh advfirewall firewall add rule name=ADclinet dir=out protocol=udp remoteport=389 remoteip=%ip% action=allow
 
